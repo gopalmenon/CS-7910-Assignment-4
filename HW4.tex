@@ -1,0 +1,99 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+
+\usepackage{sectsty} % Allows customizing section commands
+\usepackage[top=5em]{geometry}
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{5pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{gensymb}
+\usepackage{chngcntr}
+\usepackage{csquotes}
+\usepackage{flexisym}
+
+\counterwithout{figure}{section}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Utah State University, Computer Science Department} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge CS 7910 Computational Complexity\\Assignment 4 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Gopal Menon} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+\begin{enumerate}
+\item (20 points) In this exercise, we consider the following \textit{Efficient Recruiting Problem}.
+Suppose you are helping to organize a summer sports camp, and the following problem comes up. The camp is supposed to have at least one counselor who is skilled at each of the $n$ sports covered by the camp (baseball, volleyball, basketball, and so on). They have received job applications from $m$ potential counselors. For each of the $n$ sports, there is some subset of the $m$ applicants qualified in that sport. The question is: For a given number $k < m$, is it possible to hire at most $k$ of the counselors such that for each of the $n$ sports, at least one hired counselor is qualified in it. We call this the \textit{Efficient Recruiting Problem}.
+Prove that the Efficient Recruiting problem is NP-Complete.\\
+
+This problem looks very similar to the Set Cover (SC) problem, which we showed in class to be NP-Complete. The Set Cover problem is that given a universal set $U$, and a set $S$ of subsets of $U$, is it possible to find a set of $k$ elements or less of $S$, such that the union of these elements is equal to the universal set $U$. We can designate an instance of the Set Cover problem to be $(U, S, k)$.
+
+Let the set of $n$ sports be designated by $N$, the set of $m$ councillors by $M$ and let $k\textprime$ be the number of councillors that need to be hired, such that $k\textprime < m$ and we have at least one councillor for a sport. We can designate this instance of \textit{Efficient Recruiting Problem} (ERP) to be $(N, M, k\textprime)$.
+
+Given a certificate for the solution to an ERP problem instance, which will be a set of councillors $S_m$, we can verify in time $O(\left | S_m \right |)$, that is polynomial time that, the solution is correct. This shows that the ERP problem is in NP.
+
+In order to reduce SC to ERP, we can convert every element in the universal set $U$ to an element in the set of sports $N$. We can convert each element in the set $S$ of subsets of $U$ to an element in the set of councillors $M$. Each element in the set of councillors will cover the sports corresponding to the elements of the universal set $U$ covered by an element of set $S$. We can set $k\textprime - 1 = k$. So we reduce the case where a union of at most $k$ elements of $S$ covers the universal set $U$, to the case where a union of at most $k$ sports councillors from the set $M$ covers all the sports in the set of sports $N$. This reduction can clearly be done in polynomial time as it is a on-to-one reduction.
+
+In the case where $k$ subsets $S$ can cover the universal set $U$, correspondingly, a set of $k$ councillors can cover all the sports in the set $N$. Also in the case where $k$ councillors can cover all the sports in the set $N$, $k$ subsets $S$ can cover the universal set $U$. 
+
+The above two paragraphs show that ERP is in NP-Hard. Since we know that it is also in NP, it follows that ERP is NP-Complete.
+
+\end{enumerate}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
