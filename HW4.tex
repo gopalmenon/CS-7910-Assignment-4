@@ -84,7 +84,7 @@ This problem looks very similar to the Set Cover (SC) problem, which we showed i
 
 Let the set of $n$ sports be designated by $N$, the set of $m$ councillors by $M$ and let $k\textprime$ be the number of councillors that need to be hired, such that $k\textprime < m$ and we have at least one councillor for a sport. We can designate this instance of \textit{Efficient Recruiting Problem} (ERP) to be $(N, M, k\textprime)$.
 
-Given a certificate for the solution to an ERP problem instance, which will be a set of councillors $S_m$, we can verify in time $O(\left | S_m \right |)$, that is polynomial time that, the solution is correct. This shows that the ERP problem is in NP.
+Given a certificate for the solution to an ERP problem instance, which will be a set of councillors $S_m$, we can verify in time $O(\left | S_m \right | * \left | N \right |)$, that is polynomial time that, the solution is correct. This shows that the ERP problem is in NP.
 
 In order to reduce SC to ERP, we can convert every element in the universal set $U$ to an element in the set of sports $N$. We can convert each element in the set $S$ of subsets of $U$ to an element in the set of councillors $M$. Each element in the set of councillors will cover the sports corresponding to the elements of the universal set $U$ covered by an element of set $S$. We can set $k\textprime - 1 = k$. So we reduce the case where a union of at most $k$ elements of $S$ covers the universal set $U$, to the case where a union of at most $k$ sports councillors from the set $M$ covers all the sports in the set of sports $N$. This reduction can clearly be done in polynomial time as it is a on-to-one reduction.
 
@@ -98,7 +98,17 @@ The above two paragraphs show that ERP is in NP-Hard. Since we know that it is a
 Given a number $k$, the \textit{Hitting Set Problem} is to decide whether there is a hitting set $H$ of size at most $k$.
 Prove that the \textit{Hitting Set Problem} is NP-Complete.\\
 
+The Set Cover (SC) problem, a known NP-Complete problem, can be reduced to the Hitting Set (HS) problem. Let $(U, S, k)$ be an instance of the SC problem, where $U$ is the universal set of elements, $S$ is the set of subsets of $U$ and $k$ is the maximum number of elements of $S$, that can be used to cover all the elements in $U$. 
 
+Let $(B, H, k\textprime)$ be an instance of the HS problem where $B$ is the collection of $m$ subsets of a universal set $A$, $H$ is a subset of the universal set $A$ and $k\textprime$ is the maximum number of elements of $H$, that can be used to cover all the elements in $B$. 
+
+In order to reduce SC to HS, we can start with an instance of SC and convert each element in the set $U$ to an element in the set $B$. Each element of set $S$ can be converted to an element in set $H$. We can set $k=k\textprime$. This conversion can easily be done in polynomial time as it is a one-to-one conversion.
+
+Consider the case when the SC instance above is true. As a result of the conversion above, we can see that in this case the set $H$ in the HS instance $(B, H, k)$ will cover every instance of $B$. In the case when when the HS instance is true, we can see that in the equivalent SC instance, the set $S$ will cover the set $U$. This means that $Set \enspace Cover \le_P Hitting \enspace Set$. So HS will be in the NP-Hard set of problems.
+
+Given a certificate $H$ of the HS problem, we can verify in $O(\left | H \right | * \left | B \right |)$, or in polynomial time, that the solution is correct. This means that the HS problem is in the set NP.
+
+Since HS is also known to be NP-Hard, it follows that HS is NP-Complete.
 \end{enumerate}
 
 %----------------------------------------------------------------------------------------
